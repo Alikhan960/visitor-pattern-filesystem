@@ -1,0 +1,61 @@
+classDiagram
+    direction LR
+    class FileSystemElement {
+        <<interface>>
+        +accept(FileSystemVisitor visitor)
+    }
+    class File {
+        -String name
+        -long sizeInBytes
+        +getName() String
+        +getSizeInBytes() long
+        +accept(FileSystemVisitor visitor)
+    }
+    class Directory {
+        -String name
+        -List~FileSystemElement~ children
+        +add(FileSystemElement child) Directory
+        +getName() String
+        +acceptChildren(FileSystemVisitor visitor)
+        +accept(FileSystemVisitor visitor)
+    }
+    class FileSystemVisitor {
+        <<interface>>
+        +visitFile(File file)
+        +visitDirectory(Directory directory)
+    }
+    class SizeCalculatorVisitor {
+        -long totalSizeInBytes
+        +visitFile(File file)
+        +visitDirectory(Directory directory)
+        +getTotalSizeInBytes() long
+    }
+    class SearchVisitor {
+        -Predicate~File~ criterion
+        -Deque~String~ currentPath
+        -List~String~ matchingPaths
+        +visitFile(File file)
+        +visitDirectory(Directory directory)
+        +getMatchingPaths() List~String~
+    }
+    class TreePrinterVisitor {
+        -StringBuilder output
+        -int depth
+        +visitFile(File file)
+        +visitDirectory(Directory directory)
+        +getTree() String
+    }
+    class Main {
+        +main(String[] args)
+    }
+    FileSystemElement <|.. File
+    FileSystemElement <|.. Directory
+    Directory o-- FileSystemElement : children
+    FileSystemVisitor <|.. SizeCalculatorVisitor
+    FileSystemVisitor <|.. SearchVisitor
+    FileSystemVisitor <|.. TreePrinterVisitor
+    FileSystemElement ..> FileSystemVisitor : accept(visitor)
+    FileSystemVisitor ..> File : visitFile
+    FileSystemVisitor ..> Directory : visitDirectory
+    Main ..> FileSystemElement
+    Main ..> FileSystemVisitor
