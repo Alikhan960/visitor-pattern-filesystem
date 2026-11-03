@@ -6,6 +6,7 @@ import kz.astanait.patterns.visitor.util.ByteFormat;
 import kz.astanait.patterns.visitor.visitor.FileCriteria;
 import kz.astanait.patterns.visitor.visitor.SearchVisitor;
 import kz.astanait.patterns.visitor.visitor.SizeCalculatorVisitor;
+import kz.astanait.patterns.visitor.visitor.TreePrinterVisitor;
 
 /** Client: builds one object structure and runs different visitors over it. */
 public class Main {
@@ -13,6 +14,12 @@ public class Main {
     public static void main(String[] args) {
         Directory project = buildSampleProject();
 
+        System.out.println("=== Object structure (TreePrinterVisitor, added later) ===");
+        TreePrinterVisitor treePrinter = new TreePrinterVisitor();
+        project.accept(treePrinter);
+        System.out.print(treePrinter.getTree());
+
+        System.out.println();
         System.out.println("=== SizeCalculatorVisitor ===");
         SizeCalculatorVisitor sizeCalculator = new SizeCalculatorVisitor();
         project.accept(sizeCalculator);
