@@ -1,0 +1,29 @@
+=== Object structure (TreePrinterVisitor, added later) ===
++ project/
+  - README.md (2.0 KB)
+  + src/
+    - Main.java (4.1 KB)
+    - Utils.java (1.8 KB)
+    + model/
+      - User.java (900 B)
+      - Order.java (1.5 KB)
+  + docs/
+    - design.pdf (244.1 KB)
+    - notes.txt (700 B)
+  + assets/
+    - logo.png (46.9 KB)
+    - banner.png (117.2 KB)
+
+=== SizeCalculatorVisitor ===
+Total size of 'project': 419.1 KB (429148 bytes)
+
+=== SearchVisitor: files with extension .java ===
+  project/src/Main.java
+  project/src/Utils.java
+  project/src/model/User.java
+  project/src/model/Order.java
+
+=== SearchVisitor: files larger than 10 KB ===
+  project/docs/design.pdf
+  project/assets/logo.png
+  project/assets/banner.png
